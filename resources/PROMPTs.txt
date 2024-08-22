@@ -1,0 +1,105 @@
+###########################################################
+# LAB-002: ChatGPT & DFIR Knowledge          
+###########################################################
+
+# TAKS-1 - PROMPT:
+------------------
+Act as a cybersecurity expert. Describe the following PowerShell command: """\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -noni -ep bypass $zk='JHZhciA9ICJIZWxsbywgRm9yZW5zaWNhdG9ycyEiCldyaXRlLUhvc3QgJHZhcg==';fz='FromBase'+0x40+'String';$rhia=[Text.E ncoding]::ASCII.GetString([Convert]::$fz.Invoke($zk));iex $rhia;"""
+
+
+# TASK-2 - PROMPT:
+------------------
+Which MITRE ATT&CK techniques correspond to this type of activity?
+
+
+# TASK-3 - PROMPT:
+------------------
+Are any of these techniques among the cyber-attack trends of 2024?
+
+
+
+###########################################################
+# LAB-003: RAG & Custom GPTs     
+###########################################################
+
+# TASK-2 - PROMPT:
+------------------
+Act as an expert cybersecurity analyst. Analyze the following security alerts and follow the instructions at the end. Review all the logs before responding. Double check the results.
+
+Alerts:
+{Cybersecurity alerts uploaded by the user}
+
+Instructions:
+    - Extract the main Indicators of Compromise (IoC) from the alerts provided by the user such as IP addresses, files or URLs (exclude private IPs).
+    - Write a report organized by IoC type. For each IoC include a summary about the related alerts.
+
+
+# TASK-3 - PROMPT (1/2):
+------------------------
+Analyze the following cybersecurity alerts:
+"""Time,Device Name,IP Address,Alert Description,Risk Level,Potential Impact,Source
+2024-06-06 10:45,Web Server 1,192.168.1.10,Failed login attempt from unknown IP,Low,Potential unauthorized access attempt,Security Information and Event Management (SIEM)
+2024-06-06 10:30,User Laptop (John Doe),10.0.0.12,Outbound connection to suspicious website (known phishing domain),Low,User at risk of malware infection or credential theft,Endpoint Detection and Response (EDR)
+2024-06-06 10:15,Firewall,10.0.0.1,Dropped packet from blocked IP address,Low,Potential port scan attempt,Firewall logs
+2024-06-06 9:45,Database Server,172.16.0.20,Disk space usage reaching 80% capacity,Low,System performance degradation,Server monitoring tool
+2024-06-06 9:30,Web Application,192.168.1.20,Unusual access pattern detected (potential scraping attempt),Low,Potential data exfiltration,Web application firewall (WAF)
+2024-06-06 9:15,Email Server,10.0.0.2,Spam email detected,Low,Reduced mailbox efficiency,Email security system
+2024-06-06 9:00,User Workstation (Jane Doe),10.0.0.15,Application error report (common software issue),Low,Potential software malfunction,Application logs
+2024-06-06 8:45,File Server,172.16.0.30,Unauthorized access attempt to a low-privileged user account,Low,Potential reconnaissance activity,File server auditing logs
+2024-06-06 8:30,VPN Server,10.0.0.5,Failed VPN login attempt,Low,Potential unauthorized access attempt,VPN logs
+2024-06-06 8:15,Anti-Virus Software,User Laptop (John Doe),10.0.0.12,Low,Increased vulnerability to malware,Endpoint Protection Software
+2024-06-05 23:45,Web Server 2,192.168.1.15,High CPU usage,Low,System performance degradation,Web server monitoring tool
+2024-06-05 23:30,Intrusion Detection System (IDS),All devices,Potential denial-of-service (DoS) attack signature detected (low volume),Low,Minor service disruption possible,IDS logs
+2024-06-05 23:15,User Account (Mary Smith),10.0.0.25,User account inactive for more than 30 days,Low,Dormant account could be compromised,User account management tool
+2024-06-05 23:00,Switch,10.0.0.1,Link down on port connected to web server DMZ,Low,Potential service interruption,Network monitoring tool
+2024-06-05 22:45,Wireless Access Point (AP),172.16.0.1,Rogue DHCP server detected on wireless network,Low,Potential IP address conflicts and security risks,Wireless network controller logs
+2024-06-05 22:30,Email Server,10.0.0.2,Low disk space available on mailbox store,Low,Reduced email storage capacity,Email server monitoring tool
+2024-06-05 22:15,Web Application Firewall (WAF),192.168.1.20,Blocked SQL injection attempt,Low,Potential website compromise attempt,WAF logs
+2024-06-05 10:42,Anti-Virus Software,User Laptop (John Doe),10.0.0.12,Low,Anti-virus blocked suspicious file "Update.js". Potential malware infection prevented,Endpoint Protection Software
+2024-06-05 06:10,Email Server,10.0.0.2,Phishing email detected and blocked,Low,User at risk of credential theft or malware infection,Email server monitoring tool
+2024-06-04 10:45,Web Server 1,192.168.1.10,Failed login attempt from unknown IP,Low,Potential unauthorized access attempt,Security Information and Event Management (SIEM)
+2024-06-04 10:30,User Laptop (John Doe),10.0.0.12,Outbound connection to suspicious website (hxxp://conn.masjesu.zip),Low,User at risk of malware infection or credential theft,Endpoint Detection and Response (EDR)
+2024-06-04 11:00,Firewall,10.0.0.1,Dropped packet - port scan detected,Low,Information gathering attempt,Security Information and Event Management (SIEM)
+2024-06-04 11:15,Database Server,172.16.0.2,"User account ""guest"" attempted login",Low,Potential misuse of privileged account,Security Information and Event Management (SIEM)
+2024-06-04 12:00,Web Application,45.11.183.110,User forgot password - multiple attempts,Low,Account lockout for legitimate user,Web Application Log
+2024-06-04 12:30,Mail Server,192.168.1.25,High volume of outgoing emails from unused account,Low,Potential spam campaign or account compromise (low likelihood),Mail Server Log
+2024-06-04 13:00,User Workstation (Jane Smith),10.0.0.22,Outdated application detected (Adobe Flash),Low,Increased vulnerability to exploits,Vulnerability Scanner
+2024-06-04 13:15,Web Server 2,192.168.1.20,Script error in non-critical application,Low,Minor disruption to functionality,Web Server Log
+2024-06-04 13:30,Internal Network Switch,10.0.0.2,Loop detected on port,Low,Potential network performance issue,Switch Log
+2024-06-04 14:00,User Laptop (David Lee),10.0.0.33,External USB drive connected,Low,Potential data exfiltration risk,Endpoint Detection and Response (EDR)
+2024-06-04 14:15,File Server,172.16.0.10,User attempted to access unauthorized file,Low,Potential violation of access control policies,File Server Log
+2024-06-04 14:30,Intrusion Detection System (IDS),Internal Network,Anomalous traffic pattern detected,Low,Potential reconnaissance activity,IDS Alert
+2024-06-04 15:00,Web Server 3,151.80.52.32,Denial-of-Service (DoS) attack attempt (low volume),Low,Minor service disruption (unlikely),Web Server Log
+2024-06-04 15:15,User Workstation (Sarah Jones),10.0.0.44,Low disk space warning,Low,Potential performance issues,System Monitoring Tool
+2024-06-04 15:30,VPN Server,79.132.130.60,Failed VPN login attempt from unknown user,Low,Potential unauthorized access attempt (low likelihood),VPN Server Log
+2024-06-04 16:00,Wireless Access Point (AP1),170.130.165.44,Rogue DHCP server detected on network,Low,Potential unauthorized device or man-in-the-middle attack (low likelihood),Wireless Network Controller Log
+2024-06-04 16:15,Domain Name System (DNS) Server,Internal Network,Unusual DNS lookup request,Low,Potential reconnaissance activity,DNS Server Log
+2024-06-04 16:22,Anti-Virus Software,User Laptop (John Doe),10.0.0.12,Low,Anti-virus blocked suspicious file "crypted8888.exe". Potential malware infection prevented,Endpoint Protection Software
+2024-06-04 16:30,User Laptop (Michael Brown),10.0.0.55,Unsuccessful software update attempt,Low,Outdated software may increase vulnerability,Patch Management Tool
+2024-06-03 14:46,Web Application Firewall (WAF),45.11.183.110,Blocked SQL injection attempt,Low,Potential website compromise attempt,WAF logs
+2024-06-03 14:45,Web Application Firewall (WAF),45.11.183.110,Blocked SQL injection attempt,Low,Potential website compromise attempt,WAF logs"""
+
+
+# TASK-3 - PROMPT (2/2):
+------------------------
+Check if any of the extracted indicators match any of the confirmed IoCs from our CTI sources. Write an executive report with your findings.
+
+
+
+###########################################################
+# LAB-004: Agentic-AI & Data Analysis     
+###########################################################
+
+# TASK-1 - PROMPT:
+------------------
+How many unique source and destination IPs does the dataset have?
+
+
+# TASK-2 - PROMPT:
+------------------
+Our team received an alert about a possible data exfiltration. Is there any IP address that sends much more data from the company that the others?
+
+
+# TASK-3 - PROMPT:
+------------------
+Make a chart of the top 15 IPs with the most outgoing traffic
